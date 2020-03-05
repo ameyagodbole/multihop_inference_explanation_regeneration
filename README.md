@@ -82,8 +82,9 @@ We have provided a bash script `run_best_settings.sh` to train and evaluate the 
 TextGraphs-13 Shared Task on Multi-Hop Inference Explanation Regeneration
 =========================================================================
 
-Overview
---------
+<details><summary><b>Overview</b></summary>
+<p>
+
 Multi-hop inference is the task of combining more than one piece of information to solve an inference task, such as question answering.  This can take many forms, from combining free-text sentences read from books or the web, to combining linked facts from a structured knowledge base.  The Shared Task on Explanation Regeneration asks participants to develop methods to reconstruct gold explanations for elementary science questions, using a new corpus of gold explanations that provides supervision and instrumentation for this multi-hop inference task.  Each explanation is represented as an "explanation graph", a set of atomic facts (between 1 and 16 per explanation, drawn from a knowledge base of 5,000 facts) that, together, form a detailed explanation for the reasoning required to answer and explain the resoning behind a question.  Linking these facts to achieve strong performance at rebuilding the gold explanation graphs will require methods to perform multi-hop inference.  The explanations include both core scientific facts as well as detailed world knowledge, allowing this task to appeal to those interested in both multi-hop reasoning and common-sense inference.   
 
 #### The need for multi-hop inference in question answering
@@ -130,10 +131,11 @@ This observation that chaining facts together on imperfect signals often leads i
 
 #### The Task: Explanation Reconstruction 
 Many of these contemporary methodological challenges are potentially now addressable using WorldTree, a new corpus of explicit training data designed to help instrument the multi-hop inference and explanation-construction tasks.  WorldTree contains manually assembled detailed explanations, including common-sense reasoning facts, for nearly every publicly available elementary science exam question.  Explanations are represented as a series of facts that, when combined, answer a question, and provide a detailed explanation for the answer.  Facts in an explanation explicitly connect with each other on lexical overlap -- i.e., having one or more of the same words.  Each fact is drawn from a grade-appropriate knowledge base of approximately 5,000 facts that are simultaneously represented as both free-text sentences and structured knowledge (*n-ary relations*), allowing both structured and unstructured methods to be evaluated on the same data.  Additional annotation identifies which facts are "central" to the explanation, allowing automated evaluation of an inference method's ability to combine "core scientific facts" with common-sense knowledge that grounds core science knowledge with world knowledge. 
+</p>
+</details>
 
-
-Important Dates
----------------
+<details><summary><b>Important Dates</b></summary>
+<p>
 
 * 13-05-2019: Example (trial) data release
 * 17-05-2019: Training data release
@@ -146,9 +148,11 @@ Important Dates
 * __03-11-2019/04-11-2019__: [TextGraphs-13 workshop](https://sites.google.com/view/textgraphs2019)
 
 The dates are specified in the following format: `day-month-year`.
+</p>
+</details>
 
-Data
-----
+<details><summary><b>Data</b></summary>
+<p>
 
 The data used in this shared task comes from the WorldTree corpus (Jansen et al., 2018). The data includes approximately 2,200 elementary science questions drawn from the Aristo Reasoning Challenge (ARC) corpus (Clark et al., "Think you have solved question answering? Try ARC, the AI2 reasoning challenge", Arxiv).  1,680 of these questions include detailed explanation graphs for their answers, and are divided into the standard ARC train, development, and test sets.  The remaining questions that do not have gold explanation graphs required specialized reasoning (e.g. spatial, mathematical) that did not easily lend itself to the method of textual explanation used.  Each explanation is represented as a reference to one or more facts in a structured knowledge base of tables (the "tablestore").  The tablestore contains 60+ tables, each organized around a particular kind of knowledge (e.g. taxonomic knowledge, part-of knowledge, properties, changes, causality, coupled relationships).  Each "fact" is represented as one row in a given table and can be used either as a structured representation (with the n-ary relational information afforded by the columns in each table), or it can be read off directly as a free-text sentence.  The WorldTree tablestore knowledge base contains approximately 5,000 table rows/"facts", 3,600 of which are actively used in at least one explanation.  Explanation graphs commonly reuse the same knowledge (i.e. the same table row) used in other explanations.  The most common fact ("an animal is a kind of organism") is used in 89 different explanations, and approximately 1,500 facts are reused in more than one explanation.  More details, analyses, and summary statistics are provided in the WorldTree paper.  
 
@@ -160,8 +164,11 @@ For each explanation, the WorldTree corpus also includes annotation for *how imp
 Because of this annotation, it's possible to separately evaluate how many of the core/central facts, grounding facts, and synonymy relations that a given inference method reconstructs.  This would allow one to automatically determine that of two algorithms with similar performance, one primarily reconstructs more of the core/central facts, while another has a more even distribution between central, grounding, and lexical glue facts.
 
 The dataset is available at <http://cognitiveai.org/dist/worldtree_corpus_textgraphs2019sharedtask_withgraphvis.zip>. Please note that this distribution is still subject to the terms set forth in the included license `EULA AI2 Mercury Dataset 01012018.docx`.
+</p>
+</details>
 
-### Task 
+<details><summary><b>Task</b></summary>
+<p> 
 Participating systems are asked to perform an *explanation reconstruction* task, a stepping-stone task towards general multi-hop inference on large graphs.  The task is as follows: Given a question and known correct answer, build a system that reconstructs the gold explanation.  For ease of evaluation (and to encourage a variety of methods, not only those involving graph-based inference), the task is framed as a ranking task  where for a given question, one must selectively rank facts in the gold explanation higher than facts not present in the gold explanation.
 
 ### Follow-through Example
@@ -283,7 +290,11 @@ An example of a list question:
 
 An example of a hard question with many facts in the explanation, including a lot of challenging commonsense/world knowledge: 
 ![Example explanation graph](images/example-hard-treesurviveforestfire.png)
+</p>
+</details>
 
+<details><summary><b>Competition Details</b></summary>
+<p>
 
 Submission
 --------------------
@@ -307,9 +318,11 @@ You further agree that the task organizers are under no obligation to release sc
 You further agree that your system may be named according to the team name provided at the time of submission, or to a suitable shorthand as determined by the task organizers.
 
 You agree not to use or redistribute the shared task data except in the manner prescribed by its licence.
+</p>
+</details>
 
-References
-----------
+<details open><summary><b>References</b></summary>
+<p>
 
 * Jansen P. and Ustalov D. [TextGraphs 2019 Shared Task on Multi-Hop Inference for Explanation Regeneration](https://www.aclweb.org/anthology/D19-5309). *Proceedings of the Thirteenth Workshop on Graph-Based Methods for Natural Language Processing (TextGraphs-13).* Hong Kong: Association for Computational Linguistics, 2019, pp. 63&ndash;77.
 
@@ -327,6 +340,8 @@ References
   language  = {english},
 }
 ```
+</p>
+</details>
 
 ## Acknowledgements:
 
