@@ -2,7 +2,82 @@
 
 ## Reasoning over Chains of Facts for Explainable Multi-hop Inference
 
-Task details are as follows (see [task repo](https://github.com/umanlp/tg2019task)):
+### Sections
+1. [System description report](#system-description-report)
+2. [Supplementary files](#supplementary-files)
+3. [Reproducing results](#reproducing-results)
+4. [Task Details](#task-details)
+5. [Acknowledgements](#acknowledgements)
+
+## System Description Report:
+
+The complete report can be found [here](https://www.aclweb.org/anthology/D19-5313/)
+
+```
+@inproceedings{das-etal-2019-chains,
+    title = "Chains-of-Reasoning at {T}ext{G}raphs 2019 Shared Task: Reasoning over Chains of Facts for Explainable Multi-hop Inference",
+    author = "Das, Rajarshi  and
+      Godbole, Ameya  and
+      Zaheer, Manzil  and
+      Dhuliawala, Shehzaad  and
+      McCallum, Andrew",
+    booktitle = "Proceedings of the Thirteenth Workshop on Graph-Based Methods for Natural Language Processing (TextGraphs-13)",
+    month = nov,
+    year = "2019",
+    address = "Hong Kong",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/D19-5313",
+    doi = "10.18653/v1/D19-5313",
+    pages = "101--117"
+}
+```
+
+## Supplementary Files:
+
+Supplementary files including data and trained models can be found [here](https://drive.google.com/file/d/10pYwxIKjjaOBEFfp7ivz79uMrFz3asc3/view?usp=sharing).
+
+A smaller zip file containing just the data can be found [here](https://drive.google.com/file/d/1w7BFLYEt_qVUuV96YdZr45_YnU6C5k9t/view?usp=sharing).
+
+## Reproducing Results:
+
+Ensure the following directory structure:
+
+```bash
+├── annotation/ (same as the annotation directory in the data set)
+├── questions/
+|    ├── ARC-Elementary+EXPL-Train.tsv
+|    ├── ARC-Elementary+EXPL-Dev.tsv
+|    ├── ARC-Elementary+EXPL-Test-Masked.tsv
+|    ├── all_facts.tsv
+|    └── fact_usage_frequency.pkl
+├── fact_graph/ (unzip the zip file provided)
+├── predictions/
+├── README.md
+├── run_best_settings.sh
+├── bert_reranker.py
+├── bert_path_ranker.py
+├── ensemble.py
+├── evaluate.py
+├── baseline_tfidf.py
+├── Makefile
+├── images/
+├── cfp.txt
+├── worldtree_corpus.sha256
+├── requirements.txt
+└── LICENSE
+
+```
+
+We have provided a bash script `run_best_settings.sh` to train and evaluate the models required to generate the best scores found. It consists of the following parts:
+
+1. Train the bert-reranker model (see `bert_reranker.py`)
+2. Obtain predictions from the bert-reranker model
+3. Train the bert-path-ranker model (see `bert_path_ranker.py`)
+4. Obtain predictions from the bert-path-ranker model
+5. Generate ensemble prediction (see `ensemble.py`)
+6. Move redundant facts to the end of the file (the dataset contains facts in the table store that are repeated in terms of content but have different IDs)
+
+## Task Details:
 
 TextGraphs-13 Shared Task on Multi-Hop Inference Explanation Regeneration
 =========================================================================
@@ -196,7 +271,7 @@ In order to prepare a submission file for CodaLab, create a ZIP file containing 
 A Scala tf.idf baseline that achieves a MAP of 0.28 is available at:
 <https://github.com/cognitiveailab/explanationreconstructiontextgaphs2019>
 
-## Additional Example Explanation Graphs
+### Additional Example Explanation Graphs
 
 Explanation graphs vary in size (1-16 facts, an average of 6 facts per explanation), and in their connectivity properties.  Some are relatively simple, while others are complex.  Here are additional examples:
 
@@ -252,3 +327,11 @@ References
   language  = {english},
 }
 ```
+
+## Acknowledgements:
+
+A huge thanks to the organizers Peter Jansen and Dmitry Ustalov for curating this super interesting task.
+
+A big thanks to **Hugging Face** for their excellent [transformers](https://github.com/huggingface/transformers) repository. A lot of the code is built on top of their examples.
+
+This work is funded in part by the Center for Data Science and the Center for Intelligent Information Retrieval, and in part by the National Science Foundation under Grant No. IIS-1514053 and in part by the International Business Machines Corporation Cognitive Horizons Network agreement number W1668553 and in part by the Chan Zuckerberg Initiative under the project Scientific Knowledge Base Construction. Any opinions, findings and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect those of the sponsor.
