@@ -5,3 +5,5 @@ scikit-learn
 tensorboardX
 tqdm
 transformers
+# For preprocessing
+nltk
